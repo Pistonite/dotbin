@@ -36,5 +36,5 @@ SOFTWARE.
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 require('plugins')
-require('keys')
-require('opts')
+require('general')
+require('extra')

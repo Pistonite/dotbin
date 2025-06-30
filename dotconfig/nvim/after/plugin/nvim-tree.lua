@@ -8,6 +8,34 @@ vim.cmd([[
 
 ]])
 local function on_attach_nvim_tree(bufnr)
+    -- setup lualine only after nvim tree attach
+    -- to avoid loading it too early onto the tree
+    require('lualine').setup({
+        options = {
+            theme = "catppuccin",
+            disabled_filetypes = {
+                'packer',
+                'NvimTree',
+                'undotree',
+            },
+        },
+        sections = {
+            lualine_b = {
+                'branch',
+                'diff',
+                {
+                    'diagnostics',
+                    colored = true,
+                    symbols = {
+                        error = 'E',
+                        warn = 'W',
+                        hint = 'H',
+                        info = 'I',
+                    }
+                }
+            }
+        }
+    })
     -- only attack keys i need
     local function opts(desc)
         return {
