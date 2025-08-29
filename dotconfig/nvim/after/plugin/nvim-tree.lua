@@ -10,9 +10,16 @@ vim.cmd([[
 local function on_attach_nvim_tree(bufnr)
     -- setup lualine only after nvim tree attach
     -- to avoid loading it too early onto the tree
+    local lualine_theme = require("lualine.themes.catppuccin")
+    lualine_theme.normal.a.gui = ""
+    lualine_theme.insert.a.gui = ""
+    lualine_theme.visual.a.gui = ""
+    lualine_theme.replace.a.gui = ""
+    lualine_theme.command.a.gui = ""
+    lualine_theme.inactive.a.gui = ""
     require('lualine').setup({
         options = {
-            theme = "catppuccin",
+            theme = lualine_theme,
             disabled_filetypes = {
                 'packer',
                 'NvimTree',
