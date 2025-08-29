@@ -32,6 +32,7 @@ symbol = "  "
 [cmake]
 format = "[$symbol($version )]($style)"
 symbol = "\ue61d "
+style = "bright-blue"
 
 [conda]
 symbol = " "
@@ -44,6 +45,7 @@ truncate_to_repo = false
 truncation_symbol = ".../"
 use_os_path_sep = false
 read_only = " "
+style = "bright-cyan"
 
 [docker_context]
 symbol = " "
@@ -57,6 +59,7 @@ symbol = " "
 [git_branch]
 format = "[$symbol$branch]($style)"
 symbol = " "
+style = "bright-purple"
 
 [git_status]
 format = "[($ahead_behind)]($style)"
@@ -67,6 +70,7 @@ ahead = "[\uf431](bold green)"
 disabled = false
 format = "[$symbol($version )]($style)"
 symbol = " "
+style = "bright-cyan"
 
 [hg_branch]
 symbol = " "
@@ -99,6 +103,7 @@ symbol = " "
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 symbol = " "
 detect_folders = ["scripts/__pycache__"]
+style = "bright-yellow"
 
 [ruby]
 symbol = " "
@@ -106,6 +111,7 @@ symbol = " "
 [rust]
 format = "[$symbol($version )]($style)"
 symbol = " "
+style = "bright-red"
 
 [scala]
 symbol = " "
@@ -119,3 +125,4 @@ symbol = "ﯣ "
 [nodejs]
 format = "[$symbol($version )]($style)"
 symbol = " "
+style = "bright-green"
