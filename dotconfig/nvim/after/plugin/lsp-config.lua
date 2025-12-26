@@ -64,7 +64,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-require("lspconfig").lua_ls.setup({
+vim.lsp.config['lua_ls'] ={
     capabilities = lsp_capabilities,
     settings = {
         Lua = {
@@ -75,7 +75,7 @@ require("lspconfig").lua_ls.setup({
             }
         }
     }
-})
+}
 
 -- connect mason the LSP server management tool
 require("mason").setup({
