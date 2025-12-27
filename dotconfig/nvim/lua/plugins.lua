@@ -19,8 +19,8 @@ return require("packer").startup(function(use)
     use { 'terrortylor/nvim-comment',                commit = "e9ac16ab056695cad6461173693069ec070d2b23" } -- U
 
     -- ## THEME AND COLORS
-    use { "catppuccin/nvim", tag = "v1.11.0", as = "catppuccin" }
-    use { 'nvim-treesitter/nvim-treesitter',         commit = '6e42d823ce0a5a76180c473c119c7677738a09d1', run = ':TSUpdate' }
+    use { "catppuccin/nvim", as = "catppuccin",      tag = "v1.11.0" }
+    use { 'nvim-treesitter/nvim-treesitter',         branch = 'master', run = ':TSUpdate' }
     use { 'nvim-treesitter/nvim-treesitter-context', commit = '64dd4cf3f6fd0ab17622c5ce15c91fc539c3f24a' }
 
     -- ## LANGUAGE SERVICE

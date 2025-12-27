@@ -67,9 +67,12 @@ require("catppuccin").setup({
             Operator = { fg = mocha.sapphire },
             ["@punctuation.special"] = { link = "Delimiter" },
             ["@tag.delimiter"] = { link = "Delimiter" },
+            ["@constructor.lua"] = { link = "Delimiter" },
 
             -- variables
             ["@variable"] = { fg = mocha.lavender },
+            ["@lsp.type.variable"] = { fg = mocha.lavender },
+            ["@property"] = { link = "@variable" },
             ["@parameter"] = { link = "@variable" },
             ["@variable.parameter"] = { link = "@variable" },
 
