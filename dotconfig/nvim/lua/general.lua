@@ -29,8 +29,8 @@ end
 
 -- folds
 vim.opt.foldenable = false   -- no fold at startup
-vim.opt.foldmethod = 'expr'  -- treesitter folding
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- search
 vim.opt.hlsearch = true
 vim.opt.incsearch = true -- should be the default

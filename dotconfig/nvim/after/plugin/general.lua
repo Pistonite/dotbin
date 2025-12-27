@@ -17,5 +17,3 @@ require('nvim-treesitter.configs').setup({
         max_file_lines = nil,
     }
 })
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

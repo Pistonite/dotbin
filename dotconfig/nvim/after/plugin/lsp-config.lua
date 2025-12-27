@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- enable inlay hints (currently disabled by default)
         vim.lsp.inlay_hint.enable(true, { bufid })
         vim.cmd("hi LspInlayHint guifg=#d8d8d8 guibg=#3a3a3a")
-        vim.keymap.set({'n', 'v'}, 'I', function()
+        vim.keymap.set({'n', 'v'}, '<leader>i', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end, key_opts)
     end
