@@ -163,7 +163,7 @@ def copy_to_user(dotbin_nvim):
     setup_script = os.path.join(NVIM_HOME, "claudecode-setup.py")
     if os.path.exists(setup_script):
         print(f"running {setup_script}")
-        subprocess.run([sys.executable, setup_script], cwd=NVIM_HOME, check=True)
+        subprocess.run([sys.executable, setup_script, "--update"], cwd=NVIM_HOME, check=True)
 
 if __name__ == "__main__":
     dotbin_nvim = os.path.join(DOTBIN_CONFIG, "nvim")
