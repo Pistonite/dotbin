@@ -84,6 +84,14 @@ require("catppuccin").setup({
             Floaterm = { bg = frappe.base },
             FloatermNC = { bg = frappe.crust },
             FloatermBorder = { bg = frappe.base },
+
+            -- diffs
+            DiffDelete = { bg = "#53394d" }, -- 25% mocha.red on mocha.base
+            DiffAdd = { bg = "#475951"}, -- 30% mocha.green on mocha.base
+            CodeDiffLineInsert = { link = "DiffAdd" },
+            CodeDiffLineDelete = { link = "DiffDelete" }
+            -- DiffChange = { bg = "#53394d" }, -- 25% mocha.red on mocha.base
+            -- DiffText = { bg = "#475951"}, -- 30% mocha.green on mocha.base
         }
     end,
     default_integrations = true,

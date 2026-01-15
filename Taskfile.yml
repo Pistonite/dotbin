@@ -5,3 +5,4 @@ tasks:
     desc: Update dotconfig/nvim with current user config
     cmds:
       - python script/configure-nvim.py --reverse
+      - rm -rf dotconfig/nvim/lua/claudecode

@@ -1,11 +1,8 @@
 local api = require "nvim-tree.api"
-vim.keymap.set('n', '<leader>t', api.tree.open) -- open tree and focus
 vim.cmd([[
     augroup NvimTreeAutoFocus
         autocmd BufEnter * lua require'nvim-tree.api'.tree.find_file()
     augroup END
-
-
 ]])
 local function on_attach_nvim_tree(bufnr)
     -- setup lualine only after nvim tree attach
@@ -58,7 +55,10 @@ local function on_attach_nvim_tree(bufnr)
     vim.keymap.set('n', 'P', api.node.navigate.parent, opts('Go to parent'))
     vim.keymap.set('n', 'm', api.fs.rename_sub, opts('Move'))
     vim.keymap.set('n', 'o', api.node.open.edit, opts('Open'))
-    vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: vertical'))
+    vim.keymap.set('n', 'v', function()
+        require("editorapi").close_aicoder()
+        api.node.open.vertical()
+    end, opts('Open: vertical'))
     vim.keymap.set('n', 's', api.node.open.horizontal, opts('Open: split'))
     vim.keymap.set('n', 'a', api.fs.create, opts('Create'))
     vim.keymap.set('n', 'c', api.fs.copy.node, opts('Copy'))
@@ -83,7 +83,6 @@ local function on_attach_nvim_tree(bufnr)
     vim.keymap.set('n', 'g?', api.tree.toggle_help, opts('Help'))
 
     -- add custom
-    vim.keymap.set('n', '<leader>t', '<C-W>l', opts 'Unfocus tree')
 end
 
 local integration = require("integration")
@@ -120,3 +119,37 @@ require("nvim-tree").setup({
         }
     }
 })
+require("codediff").setup {
+    keymaps = {
+        view = {
+            quit = "<esc>",                    -- Close diff tab
+            toggle_explorer = "<leader>T",  -- Toggle explorer visibility (explorer mode only)
+            next_hunk = "]c",   -- Jump to next change
+            prev_hunk = "[c",   -- Jump to previous change
+            next_file = "]f",   -- Next file in explorer mode
+            prev_file = "[f",   -- Previous file in explorer mode
+            -- diff_get = "do",    -- Get change from other buffer (like vimdiff)
+            -- diff_put = "dp",    -- Put change to other buffer (like vimdiff)
+        },
+        explorer = {
+            select = "o",    -- Open diff for selected file
+            --     hover = "K",        -- Show file diff preview
+            --     refresh = "R",      -- Refresh git status
+            toggle_view_mode = "i",  -- Toggle between 'list' and 'tree' views
+            toggle_stage = nil,--"s", -- Stage/unstage selected file
+            stage_all = nil,--"S",    -- Stage all files
+            unstage_all = nil,--"U",  -- Unstage all files
+            restore = nil--"x",      -- Discard changes (restore file)
+        },
+        conflict = {
+            accept_incoming = nil,--j"<leader>ct",  -- Accept incoming (theirs/left) change
+            accept_current = nil,--"<leader>co",   -- Accept current (ours/right) change
+            accept_both = nil,--"<leader>cb",      -- Accept both changes (incoming first)
+            discard = nil,--"<leader>cx",          -- Discard both, keep base
+            next_conflict = "]x",            -- Jump to next conflict
+            prev_conflict = "[x",            -- Jump to previous conflict
+            diffget_incoming = "2do",        -- Get hunk from incoming (left/theirs) buffer
+            diffget_current = "3do",         -- Get hunk from current (right/ours) buffer
+        },
+    },
+}

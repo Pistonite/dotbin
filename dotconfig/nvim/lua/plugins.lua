@@ -22,14 +22,15 @@ return require("packer").startup(function(use)
     use { "catppuccin/nvim", as = "catppuccin",      tag = "v1.11.0" }
     use { 'nvim-treesitter/nvim-treesitter',         branch = 'master', run = ':TSUpdate' }
     use { 'nvim-treesitter/nvim-treesitter-context', commit = '64dd4cf3f6fd0ab17622c5ce15c91fc539c3f24a' }
+    use { 'esmuellert/codediff.nvim',                tag = "v2.9.3" }
+    -- codediff dependency
+    use { 'MunifTanjim/nui.nvim',                    commit = "de740991c12411b663994b2860f1a4fd0937c130" }
 
     -- ## LANGUAGE SERVICE
     use { 'neovim/nvim-lspconfig',                   commit = "d696e36d5792daf828f8c8e8d4b9aa90c1a10c2a" }
     use { 'felpafel/inlay-hint.nvim',                commit = "ee8aa9806d1e160a2bc08b78ae60568fb6d9dbce" }
     use { 'mason-org/mason.nvim',                    commit = "57e5a8addb8c71fb063ee4acda466c7cf6ad2800", run = ":MasonUpdate" }
     use { 'williamboman/mason-lspconfig.nvim',       commit = "9f9c67795d0795a6e8612f5a899ca64a074a1076" }
-    use { 'github/copilot.vim',                      tag = "v1.58.0" }
-    use { 'CopilotC-Nvim/CopilotChat.nvim',          tag = "v4.7.4" }
     -- completion
     use { 'hrsh7th/nvim-cmp',                        commit = "d97d85e01339f01b842e6ec1502f639b080cb0fc" }
     use { 'hrsh7th/cmp-nvim-lsp',                    commit = "cbc7b02bb99fae35cb42f514762b89b5126651ef" }
@@ -42,4 +43,7 @@ return require("packer").startup(function(use)
         ft = { 'java' },
         config = function () require('lsp-wrapper.jdtls') end
     }
+
+    -- ## AI
+    -- note claudecode is installed and patched separately
 end)

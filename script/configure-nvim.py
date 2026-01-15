@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import subprocess
 
 WINDOWS = sys.platform == "win32"
 
@@ -16,10 +17,16 @@ def copy_config_file(src, dst, ignore_keep=False):
         Copy src to dst
 
         If ignore_keep, don't respect @keep-start or @keep-end
+        Keep logic only applies to .lua files
     """
     dir_path = os.path.dirname(dst)
     if not os.path.exists(dir_path):
         os.makedirs(dir_path, exist_ok=True)
+
+    # For non-.lua files, just copy directly
+    if not src.endswith(".lua"):
+        shutil.copy(src, dst)
+        return
 
     keep_sections = []
     if not os.path.exists(dst):
@@ -118,8 +125,9 @@ def comment_out_extra_files(src, dst, path):
             comment_out_file(dst_path)
 
 FILES = [
-    # init entry point
     "init.lua",
+    "claudecode-setup.py",
+    "claudecode.patch"
 ]
 DIRS = [
     "lua",
@@ -142,6 +150,20 @@ def copy_to_user(dotbin_nvim):
     for d in DIRS:
         comment_out_extra_files(dotbin_nvim, NVIM_HOME, d)
         copy_config_dir(dotbin_nvim, NVIM_HOME, d, ignore_keep=False)
+
+    # Create undotree directory, otherwise things will fail
+    home = os.environ.get("HOME") or os.environ.get("USERPROFILE")
+    if home:
+        undotree_dir = os.path.join(home, ".vim", "undotree")
+        if not os.path.exists(undotree_dir):
+            print(f"mkdir -p {undotree_dir}")
+            os.makedirs(undotree_dir, exist_ok=True)
+
+    # Run claudecode-setup.py
+    setup_script = os.path.join(NVIM_HOME, "claudecode-setup.py")
+    if os.path.exists(setup_script):
+        print(f"running {setup_script}")
+        subprocess.run([sys.executable, setup_script], cwd=NVIM_HOME, check=True)
 
 if __name__ == "__main__":
     dotbin_nvim = os.path.join(DOTBIN_CONFIG, "nvim")
