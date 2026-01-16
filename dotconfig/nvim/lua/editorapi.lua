@@ -360,8 +360,14 @@ function M.open_symbol_finder()
     M.switch_to_editview_then(function() require("telescope.builtin").treesitter() end)
 end
 
+local aicoder_started = false
+
 ---Switch to EDIT and open AI Coder
 function M.open_aicoder()
+    if not aicoder_started then
+        vim.cmd.ClaudeCodeStart()
+        aicoder_started = true
+    end
     local do_open_aicoder = function()
         M.editview_focus_then(function()
             vim.cmd.ClaudeCode()

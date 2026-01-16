@@ -62,6 +62,12 @@ def apply_patch() -> bool:
     if not PATCH_FILE.exists():
         print(f"Warning: {PATCH_FILE} not found, skipping patch application.")
         return True
+    # Convert CRLF to LF in patch file (Windows only)
+    if sys.platform == "win32":
+        content = PATCH_FILE.read_bytes()
+        content = content.replace(b"\r\n", b"\n")
+        PATCH_FILE.write_bytes(content)
+        print(f"Converted {PATCH_FILE} to LF line endings.")
     print(f"Applying {PATCH_FILE}...")
     result = run_git("apply", "--3way", str(PATCH_FILE.absolute()), cwd=LOCAL_REPO_PATH, check=False)
     if result.returncode != 0:

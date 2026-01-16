@@ -172,7 +172,7 @@ local _ = (function()
     noremap('n', '<leader>e', function() editorapi.switch_to_editview_then(nil) end)
     -- ## AI Coder integration
     noremap('n', '<leader>bb', editorapi.open_aicoder)
-    noremap('n', '<leader>bg', editorapi.close_aicoder)
+    noremap({'n', 't'}, '<leader>bg', editorapi.close_aicoder)
     noremap({'n', 't'}, '<leader>bv', editorapi.open_or_accept_aidiff)
     noremap({'n', 't'}, '<leader>bd', editorapi.deny_aidiff)
     noremap('n', '<leader>bl', function() editorapi.send_to_aicoder(false) end)
